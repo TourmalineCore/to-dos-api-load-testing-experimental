@@ -4,7 +4,7 @@ import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
 import io.karatelabs.gatling.KarateProtocolBuilder;
 
-import static io.gatling.javaapi.core.CoreDsl.constantUsersPerSec;
+import static io.gatling.javaapi.core.CoreDsl.rampUsersPerSec;
 import static io.gatling.javaapi.core.CoreDsl.scenario;
 import static io.karatelabs.gatling.KarateDsl.*;
 
@@ -21,8 +21,11 @@ public class ToDosLoadTest extends Simulation {
 
         setUp(
                 main.injectOpen(
-                    constantUsersPerSec(10).during(Duration.ofSeconds(10))
+                        rampUsersPerSec(1).to(50).during(Duration.ofMinutes(1))
                 ).protocols(protocol)
+        ).assertions(
+                io.gatling.javaapi.core.CoreDsl.global().failedRequests().percent().lt(5.0),
+                io.gatling.javaapi.core.CoreDsl.global().responseTime().percentile(95).lt(1000)
         );
     }
 }
