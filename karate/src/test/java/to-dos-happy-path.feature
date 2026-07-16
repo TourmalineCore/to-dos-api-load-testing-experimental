@@ -48,16 +48,14 @@ Feature: To-Dos
       """
 
     # Complete the todo with the id (soft delete)
+    * def completeBody = { toDoIds: [todoId] }
+
     Given url apiRootUrl
     And path 'to-dos/complete'
-    And request
-      """
-      {
-      "toDoIds": [#(todoId)]
-      }
-      """
+    And request completeBody
     When method POST
     Then status 200
+
 
     # Delete the todo with the id (hard delete)
     Given url apiRootUrl
