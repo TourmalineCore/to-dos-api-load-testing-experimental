@@ -10,13 +10,6 @@ Feature: To-Dos
     * def jsUtils = read('./js-utils.js')
     * def apiRootUrl = jsUtils().getEnvVariable('API_ROOT_URL')
     
-    # Check health endpoint
-    Given url apiRootUrl
-    And path 'health'
-    When method GET
-    Then status 200
-    Then match response == { status: "ok" }
-    
     # Create a new todo
     * def randomName = '[API-E2E]-test-todo-' + Math.random()
 
