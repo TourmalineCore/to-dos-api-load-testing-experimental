@@ -1,0 +1,9 @@
+{
+  "features": {
+    "ghcr.io/devcontainers-extra/features/jmeter-sdkman:2": {
+      "version": "2.0.16",
+      "resolved": "ghcr.io/devcontainers-extra/features/jmeter-sdkman@sha256:f3576441edb480cb4dfbb1d2aaaf58722dc3d3bf6344f753bda105d21d4fead9",
+      "integrity": "sha256:f3576441edb480cb4dfbb1d2aaaf58722dc3d3bf6344f753bda105d21d4fead9"
+    }
+  }
+}
