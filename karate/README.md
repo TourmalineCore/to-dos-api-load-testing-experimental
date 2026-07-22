@@ -1,10 +1,8 @@
 # Karate + Gatling solution
 
-nestjs
-export API_ROOT_URL=http://host.docker.internal:5005/api/to-dos-api/
-cpp
-export API_ROOT_URL=http://host.docker.internal:4501/api/
+* Open dev container via F1 -> Dev Containers: Reopen in Container
+* Run in terminal `make run-cpp` to run load testing for to-dos-cpp in 4501 port or `make run-nestjs` to run load testing for to-dos-nestjs in 5005 port
 
-mvn clean test-compile
+## Results 
 
-mvn gatling:tests
+Output results of load testing will be placed in `target/gatling/todosloadtest-*/index.html`.
