@@ -58,7 +58,7 @@
                 <version>${gatling.plugin.version}</version>
                 <configuration>
                     <includes>
-                        <include>simulations.ToDosLoadTest</include>
+                        <include>simulations.ToDosStressTest</include>
                     </includes>
                     <!-- Gatling 4.7+ on Java 17/21 uses MethodHandles.privateLookupIn
                             on java.lang internals — needs java.lang opened to its module. -->
