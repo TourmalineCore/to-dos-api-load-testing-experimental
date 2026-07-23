@@ -80,10 +80,83 @@ The increase in responses from the CPP api started with >10 concurrent users. `P
 
 Html page of result is avaliable [here](tools-result\karate\nestjs\index.html).
 
-Throughout the test, the response time was on average 10-20 ms. Except for the spike at ~150 seconds of >30 users. The response time on the burst took ~150 ms.
+Throughout the test, the response time was on average 10-20 ms. Except for the spike at ~150 seconds of >10 users. The response time on the burst took ~150 ms.
 
 #### Tool Conclusion
 
 In general, the karate+gatling tool proved to be confident. 
 The time displayed in the results was close to the expected time.
 Setup and installation is a bit difficult, but it can come down to overused instructions and code snippets. Another obvious advantage is that karate e2e testing is widely used in our projects. The tests of which can be reused in load testing. Also, reading the tests in gherkin greatly simplifies their understanding and modification.
+
+### JMeter
+
+#### CPP
+
+Html page of result is avaliable [here](tools-result\jmeter\cpp\index.html).
+
+| Elapsed | users | Response time |
+| ------- | ------| ------------- |
+| ~30s    | 1     | 467ms         |
+| ~70s    | 6     | 921ms         |
+| ~110s   | 11    | 1020ms        |
+| ~151s   | 16    | 1093ms        |
+| ~197s   | 21    | 1207ms        |
+
+
+JMeter showed same level of degradation as karate tool, but response time lower than karate tool.
+
+#### Nestjs
+
+Html page of result is avaliable [here](tools-result\jmeter\nestjs\index.html).
+
+| Elapsed | users | Response time |
+| ------- | ------| ------------- |
+| ~30s    | 1     | 58ms          |
+| ~68s    | 6     | 10ms          |
+| ~110s   | 11    | 23ms          |
+| ~150s   | 16    | 18ms          |
+| ~189s   | 21    | 4078ms        |
+
+The response time did not exceed 60 ms
+
+#### Tool Conclusion
+
+The CPP results in JMeter are completely comparable to the results of Karate+Gatling - degradation begins at a similar level of parallelism. For nestjs, the maximum response time to successful requests is basically the same as for Karate. Unlike Karate, JMeter has a more complex setup of test scenarios. The XML type of tests is difficult to create and review.
+
+### k6
+
+#### CPP
+
+Html page of result is avaliable [here](tools-result\k6\cpp-summary.html).
+
+| Metric | Value |
+| ------ | ----- |
+| Avg response time | 26.58ms |
+| Median | 23.30ms |
+| P(95) | 45.56ms |
+| Max response time | 1510.04ms |
+| Max VUs | 21 |
+| Total requests | 88525 |
+| Failed requests | 0 |
+
+The CPP API completed the entire run with zero failed requests and zero failed checks. The average and median response times stayed low (23-27ms), but the max response time spiked to 1510ms, which is consistent with the same pattern seen in Karate and JMeter - occasional slow writes under concurrent load, most likely on `POST /to-dos`.
+
+#### Nestjs
+
+Html page of result is avaliable [here](tools-result\k6\nestjs-summary.html).
+
+| Metric | Value |
+| ------ | ----- |
+| Avg response time | 14.46ms |
+| Median | 11.98ms |
+| P(95) | 27.76ms |
+| Max response time | 144.45ms |
+| Max VUs | 21 |
+| Total requests | 161305 |
+| Failed requests | 0 |
+
+Nestjs also finished with zero failed requests and zero failed checks. Response times stayed consistently low throughout (avg 14.46ms, max 144.45ms) — no timeout errors or false network failures, and no signs of the burst-related spike observed in Karate.
+
+#### Tool Conclusion
+
+k6 confirmed the overall performance, as in Karate and JMeter. Nestjs is significantly faster and more stable than CPP with the same step-by-step loading scheme. However, the built-in HTML summary "k6-reporter" provides only cumulative statistics (average/minimum/average/maximum/p90/p95) for the entire test run — it does not break response time into load levels, unlike karate or JMeter. This means that the table above cannot display the progression of the number of virtual users in the same way as it was in the Karate and JMeter summaries - these data are missing from the report in the form in which it was generated. To get more detailed statistics, you need to use another reporter.
