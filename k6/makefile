@@ -6,7 +6,7 @@ help:
 	@echo "  make run-cpp   - run load test against api.port=4501"
 
 run-nestjs:
-	export $$(grep -v '^#' nestjs.env | xargs) && k6 run to-dos-load-test.js
+	export $$(grep -v '^#' nestjs.env | xargs) && k6 run to-dos-stress-test.js
 
 run-cpp:
-	export $$(grep -v '^#' cpp.env | xargs) && k6 run to-dos-load-test.js
+	export $$(grep -v '^#' cpp.env | xargs) && k6 run to-dos-stress-test.js
