@@ -38,6 +38,7 @@ Cores:	8
 Logical processors:	16
 
 RAM:
+
 32.0 GB DDR4
 Speed:	3200 MT/s
 Available	4.1 GB
@@ -63,7 +64,7 @@ If either threshold is breached at any point, the run is flagged as failed, sign
 
 #### CPP
 
-Html page of result is avaliable [here](tools-result\karate\cpp\index.html).
+Html page of result is avaliable [here](tools-result/karate/cpp/index.html).
 
 | Elapsed | users | Response time |
 | ------- | ------| ------------- |
@@ -78,7 +79,7 @@ The increase in responses from the CPP api started with >10 concurrent users. `P
 
 #### Nestjs
 
-Html page of result is avaliable [here](tools-result\karate\nestjs\index.html).
+Html page of result is avaliable [here](tools-result/karate/nestjs/index.html).
 
 Throughout the test, the response time was on average 10-20 ms. Except for the spike at ~150 seconds of >10 users. The response time on the burst took ~150 ms.
 
@@ -92,7 +93,7 @@ Setup and installation is a bit difficult, but it can come down to overused inst
 
 #### CPP
 
-Html page of result is avaliable [here](tools-result\jmeter\cpp\index.html).
+Html page of result is avaliable [here](tools-result/jmeter/cpp/index.html).
 
 | Elapsed | users | Response time |
 | ------- | ------| ------------- |
@@ -107,7 +108,7 @@ JMeter showed same level of degradation as karate tool, but response time lower 
 
 #### Nestjs
 
-Html page of result is avaliable [here](tools-result\jmeter\nestjs\index.html).
+Html page of result is avaliable [here](tools-result/jmeter/nestjs/index.html).
 
 | Elapsed | users | Response time |
 | ------- | ------| ------------- |
@@ -127,7 +128,7 @@ The CPP results in JMeter are completely comparable to the results of Karate+Gat
 
 #### CPP
 
-Html page of result is avaliable [here](tools-result\k6\cpp-summary.html).
+Html page of result is avaliable [here](tools-result/k6/cpp-summary.html).
 
 | Metric | Value |
 | ------ | ----- |
@@ -143,7 +144,7 @@ The CPP API completed the entire run with zero failed requests and zero failed c
 
 #### Nestjs
 
-Html page of result is avaliable [here](tools-result\k6\nestjs-summary.html).
+Html page of result is avaliable [here](tools-result/k6/nestjs-summary.html).
 
 | Metric | Value |
 | ------ | ----- |
